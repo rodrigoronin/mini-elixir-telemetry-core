@@ -1,0 +1,9 @@
+<h1>Telemetry Dashboard</h1>
+
+<ul>
+  <%= for {id, status} <- @telemetry do %>
+    <li>
+      <strong><%= id %></strong>: <%= status %>
+    </li>
+  <% end %>
+</ul>

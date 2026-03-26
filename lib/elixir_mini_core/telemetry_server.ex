@@ -28,6 +28,12 @@ defmodule ElixirMiniCore.TelemetryServer do
   def handle_cast({:event, sensor_id, status}, state) do
     :ets.insert(:telemetry_cache, {sensor_id, status})
 
+    Phoenix.PubSub.broadcast(
+      ElixirMiniCore.PubSub,
+      "telemetry",
+      {:new_event, sensor_id, status}
+    )
+
     {:noreply, state}
   end
 
