@@ -14,6 +14,7 @@ defmodule ElixirMiniCore.Application do
        repos: Application.fetch_env!(:elixir_mini_core, :ecto_repos), skip: skip_migrations?()},
       {DNSCluster, query: Application.get_env(:elixir_mini_core, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: ElixirMiniCore.PubSub},
+      ElixirMiniCore.TelemetryServer,
       # Start a worker by calling: ElixirMiniCore.Worker.start_link(arg)
       # {ElixirMiniCore.Worker, arg},
       # Start to serve requests, typically the last entry
