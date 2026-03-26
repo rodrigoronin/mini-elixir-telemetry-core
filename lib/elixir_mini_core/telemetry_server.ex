@@ -18,7 +18,7 @@ defmodule ElixirMiniCore.TelemetryServer do
   # Callbacks
 
   @impl true
-  def init(state) do
+  def init(_state) do
     table = :ets.new(:telemetry_cache, [:named_table, :public, read_concurrency: true])
 
     {:ok, table}
