@@ -20,7 +20,7 @@ defmodule ElixirMiniCore.TelemetryPersistor do
     data = :ets.tab2list(:telemetry_cache)
 
     Enum.each(data, fn {sensor_id, status} ->
-      Telemetry.create_node(%{
+      Telemetry.upsert_node(%{
         sensor_id: sensor_id,
         status: status
       })

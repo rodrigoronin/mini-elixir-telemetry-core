@@ -101,4 +101,13 @@ defmodule ElixirMiniCore.Telemetry do
   def change_node(%Node{} = node, attrs \\ %{}) do
     Node.changeset(node, attrs)
   end
+
+  def upsert_node(attrs) do
+    %Node{}
+    |> Node.changeset(attrs)
+    |> Repo.insert(
+      on_conflict: [set: [status: attrs.status, updated_at: DateTime.utc_now()]],
+      conflict_target: :sensor_id
+    )
+  end
 end

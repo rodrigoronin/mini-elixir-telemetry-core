@@ -8,5 +8,7 @@ defmodule ElixirMiniCore.Repo.Migrations.CreateNodes do
 
       timestamps(type: :utc_datetime)
     end
+
+    create unique_index(:nodes, [:sensor_id]) # stops duplication
   end
 end
