@@ -13,11 +13,10 @@ defmodule ElixirMiniCoreWeb.DashboardLive do
   end
 
   @impl true
-  def handle_info({:new_event, sensor_id, status}, socket) do
-    updated = socket.assigns.telemetry
-    |> Enum.reject(fn {id, _} -> id == sensor_id end)
-    |> Enum.concat([{sensor_id, status}])
+  def handle_info({:new_event, _sensor_id, _status}, socket) do
+    # data = ElixirMiniCore.TelemetryServer.get_state()
+    data = :ets.tab2list(:telemetry_cache)
 
-  {:noreply, assign(socket, telemetry: updated)}
+    {:noreply, assign(socket, telemetry: data)}
   end
 end
